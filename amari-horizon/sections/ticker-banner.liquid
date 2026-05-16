@@ -1,0 +1,46 @@
+<div class="marquee{% if section.settings.dark_mode %} section--dark{% endif %}"
+     style="background-color:{{ section.settings.bg_color }};border-color:{{ section.settings.border_color }};">
+  <div class="marquee__track" aria-hidden="true">
+    {%- assign items_doubled = section.blocks | concat: section.blocks -%}
+    {%- for block in items_doubled -%}
+      <span class="marquee__item" {{ block.shopify_attributes }}>
+        {{ block.settings.text }}
+        {%- if block.settings.show_spark -%}
+          <svg class="marquee__spark" viewBox="0 0 50 50" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25 0l3 22 22 3-22 3-3 22-3-22L0 25l22-3z"/>
+          </svg>
+        {%- endif -%}
+      </span>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ticker / Marquee",
+  "settings": [
+    { "type": "checkbox", "id": "dark_mode", "label": "Dark background", "default": false },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#FFFFFF" },
+    { "type": "color", "id": "border_color", "label": "Border color", "default": "#E8E8E8" },
+    { "type": "range", "id": "speed", "label": "Speed (seconds per loop)", "min": 10, "max": 60, "step": 5, "default": 30 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Marquee item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Get Up To 40% Off" },
+        { "type": "checkbox", "id": "show_spark", "label": "Show sparkle", "default": true }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Ticker Banner",
+    "blocks": [
+      { "type": "item", "settings": { "text": "Get Up To 40% Off", "show_spark": true } },
+      { "type": "item", "settings": { "text": "NEW ARRIVAL", "show_spark": true } },
+      { "type": "item", "settings": { "text": "Free Shipping on $100+", "show_spark": true } }
+    ]
+  }]
+}
+{% endschema %}

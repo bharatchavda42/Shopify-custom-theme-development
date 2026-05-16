@@ -1,0 +1,15 @@
+<div class="quantity-input" id="QuantityWrapper">
+  <button type="button" class="quantity-input__btn" id="QtyMinus" aria-label="{{ 'products.product.decrease_quantity' | t | default: 'Decrease quantity' }}">
+    <svg width="12" height="2" viewBox="0 0 12 2" fill="currentColor"><rect width="12" height="2" rx="1"/></svg>
+  </button>
+  <input class="quantity-input__field"
+         type="number"
+         id="{{ input_id }}"
+         name="quantity"
+         value="{% if item %}{{ item.quantity }}{% else %}1{% endif %}"
+         min="1"
+         aria-label="{{ 'products.product.quantity' | t | default: 'Quantity' }}">
+  <button type="button" class="quantity-input__btn" id="QtyPlus" aria-label="{{ 'products.product.increase_quantity' | t | default: 'Increase quantity' }}">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><rect x="5" width="2" height="12" rx="1"/><rect y="5" width="12" height="2" rx="1"/></svg>
+  </button>
+</div>

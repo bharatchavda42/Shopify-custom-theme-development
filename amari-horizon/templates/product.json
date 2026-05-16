@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "block_order": ["description","shipping","returns"],
+      "blocks": {
+        "description": { "type": "tab", "settings": { "heading": "Description", "content": "<p>Product description goes here.</p>" } },
+        "shipping": { "type": "tab", "settings": { "heading": "Shipping & Delivery", "content": "<p>Free shipping on orders over $100. Standard delivery 3-5 business days.</p>" } },
+        "returns": { "type": "tab", "settings": { "heading": "Returns", "content": "<p>30-day hassle-free returns. Items must be unworn with tags attached.</p>" } }
+      },
+      "settings": {}
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You May Also Like",
+        "products_to_show": 4,
+        "intent": "related"
+      }
+    }
+  },
+  "order": ["main","recommendations"]
+}

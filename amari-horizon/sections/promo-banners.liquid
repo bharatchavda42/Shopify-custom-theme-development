@@ -1,0 +1,50 @@
+<section class="section--flush promo-banners">
+  {%- for block in section.blocks -%}
+    <div class="promo-banner" {{ block.shopify_attributes }}>
+      {%- if block.settings.image != blank -%}
+        <img src="{{ block.settings.image | image_url: width: 1200 }}"
+             alt="{{ block.settings.image.alt | default: block.settings.title }}"
+             class="promo-banner__image"
+             loading="lazy" width="1200" height="660">
+      {%- else -%}
+        <div style="width:100%;height:100%;min-height:660px;background:var(--color-bg-alt);"></div>
+      {%- endif -%}
+      <div class="promo-banner__overlay"></div>
+      <div class="promo-banner__content">
+        {%- if block.settings.label != blank -%}
+          <p class="promo-banner__label">{{ block.settings.label }}</p>
+        {%- endif -%}
+        {%- if block.settings.title != blank -%}
+          <h2 class="promo-banner__title">{{ block.settings.title }}</h2>
+        {%- endif -%}
+        {%- if block.settings.button_label != blank -%}
+          <a href="{{ block.settings.button_link }}" class="btn btn--ghost">{{ block.settings.button_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "Promo Banners",
+  "blocks": [{
+    "type": "banner",
+    "name": "Banner",
+    "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "label", "label": "Label (above title)", "default": "Hurry up!" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Sale is Live" },
+      { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Now" },
+      { "type": "url",  "id": "button_link",  "label": "Button link" }
+    ]
+  }],
+  "presets": [{
+    "name": "Promo Banners",
+    "blocks": [
+      { "type": "banner", "settings": { "label": "Hurry up!", "title": "Sale is Live", "button_label": "Shop Now" } },
+      { "type": "banner", "settings": { "label": "Winter Collection", "title": "NEW ARRIVAL", "button_label": "Explore Now" } }
+    ]
+  }]
+}
+{% endschema %}

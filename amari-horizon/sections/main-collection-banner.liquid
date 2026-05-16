@@ -1,0 +1,27 @@
+<div class="collection-banner">
+  {%- if section.settings.show_image and collection.image -%}
+    <div class="collection-banner__media" style="position:relative;height:300px;overflow:hidden;">
+      <img src="{{ collection.image | image_url: width: 1920 }}" alt="{{ collection.image.alt | default: collection.title }}" style="width:100%;height:100%;object-fit:cover;" loading="lazy" width="1920" height="300">
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;">
+        <h1 style="color:#FFFFFF;font-size:var(--text-h1);">{{ collection.title }}</h1>
+      </div>
+    </div>
+  {%- else -%}
+    <div class="container" style="padding-block:var(--space-12);">
+      <h1 style="font-size:var(--text-h2);">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <div style="font-size:var(--text-base);color:var(--color-text-muted);margin-top:var(--space-3);max-width:600px;">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Collection Banner",
+  "settings": [
+    { "type": "checkbox", "id": "show_image", "label": "Show collection image", "default": true }
+  ],
+  "presets": [{ "name": "Collection Banner" }]
+}
+{% endschema %}

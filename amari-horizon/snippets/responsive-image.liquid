@@ -1,0 +1,20 @@
+{%- liquid
+  assign img = image
+  assign img_widths = widths | default: '400,600,800,1000,1200,1600'
+  assign img_sizes = sizes | default: '100vw'
+  assign img_loading = loading | default: 'lazy'
+  assign img_alt = alt | default: img.alt | default: ''
+  assign img_class = class | default: ''
+  assign img_w = width | default: 1200
+  assign img_h = height | default: img_w | divided_by: aspect | default: img_w
+-%}
+{%- if img != blank -%}
+  <img src="{{ img | image_url: width: img_w }}"
+       srcset="{%- for w in img_widths | split: ',' -%}{{ img | image_url: width: w }} {{ w }}w{%- unless forloop.last -%}, {%- endunless -%}{%- endfor -%}"
+       sizes="{{ img_sizes }}"
+       alt="{{ img_alt | escape }}"
+       class="{{ img_class }}"
+       loading="{{ img_loading }}"
+       width="{{ img_w }}"
+       height="{{ img_h }}">
+{%- endif -%}

@@ -1,0 +1,118 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Amari Horizon",
+    "theme_version": "1.0.0",
+    "theme_author": "Amari",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "header", "content": "Brand" },
+      { "type": "color", "id": "colors_primary",    "label": "Accent / Primary",  "default": "#FFAA01" },
+      { "type": "color", "id": "colors_secondary",  "label": "Secondary",         "default": "#4A4A4A" },
+      { "type": "header", "content": "Background" },
+      { "type": "color", "id": "colors_background",     "label": "Page background", "default": "#FFFFFF" },
+      { "type": "color", "id": "colors_background_alt",  "label": "Alt background",  "default": "#F7F7F7" },
+      { "type": "header", "content": "Text" },
+      { "type": "color", "id": "colors_text",    "label": "Body text",    "default": "#4A4A4A" },
+      { "type": "color", "id": "colors_heading", "label": "Heading text", "default": "#1A1A1A" },
+      { "type": "header", "content": "UI" },
+      { "type": "color", "id": "colors_border",      "label": "Border",          "default": "#E8E8E8" },
+      { "type": "color", "id": "colors_button_bg",   "label": "Button background","default": "#1A1A1A" },
+      { "type": "color", "id": "colors_button_text", "label": "Button text",      "default": "#FFFFFF" },
+      { "type": "color", "id": "colors_sale",        "label": "Sale badge",       "default": "#1A1A1A" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      { "type": "font_picker", "id": "type_heading_font", "label": "Heading font", "default": "assistant_n4" },
+      { "type": "font_picker", "id": "type_body_font",    "label": "Body font",    "default": "assistant_n4" },
+      { "type": "range", "id": "type_base_size", "label": "Base font size", "min": 12, "max": 18, "step": 1, "unit": "px", "default": 16 },
+      { "type": "select", "id": "type_heading_transform", "label": "Heading case",
+        "options": [
+          { "value": "none",      "label": "Default" },
+          { "value": "uppercase", "label": "UPPERCASE" },
+          { "value": "capitalize","label": "Capitalize" }
+        ], "default": "none"
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      { "type": "range", "id": "page_width",  "label": "Page max-width", "min": 1000, "max": 1800, "step": 20, "unit": "px", "default": 1720 },
+      { "type": "range", "id": "page_gutter", "label": "Page gutter",    "min": 16,   "max": 120,  "step": 4,  "unit": "px", "default": 100 }
+    ]
+  },
+  {
+    "name": "Buttons",
+    "settings": [
+      { "type": "range", "id": "button_radius", "label": "Border radius", "min": 0, "max": 50, "step": 1, "unit": "px", "default": 0 },
+      { "type": "select", "id": "button_style", "label": "Default style",
+        "options": [{"value":"filled","label":"Filled"},{"value":"outline","label":"Outline"}],
+        "default": "filled"
+      }
+    ]
+  },
+  {
+    "name": "Cards",
+    "settings": [
+      { "type": "range",    "id": "card_radius", "label": "Card border radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 0 },
+      { "type": "select",   "id": "card_shadow",  "label": "Card shadow",
+        "options": [{"value":"none","label":"None"},{"value":"sm","label":"Small"},{"value":"md","label":"Medium"},{"value":"lg","label":"Large"}],
+        "default": "none"
+      },
+      { "type": "checkbox", "id": "card_border",  "label": "Show card border",  "default": false }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      { "type": "select", "id": "cart_type", "label": "Cart type",
+        "options": [{"value":"drawer","label":"Drawer"},{"value":"page","label":"Page"}],
+        "default": "drawer"
+      },
+      { "type": "checkbox", "id": "cart_free_shipping_bar",       "label": "Show free shipping bar",           "default": true },
+      { "type": "text",     "id": "cart_free_shipping_threshold", "label": "Free shipping threshold (number)", "default": "100" }
+    ]
+  },
+  {
+    "name": "Search",
+    "settings": [
+      { "type": "checkbox", "id": "predictive_search_enabled", "label": "Enable predictive search", "default": true }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Favicon image" }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram" },
+      { "type": "url", "id": "social_facebook",  "label": "Facebook" },
+      { "type": "url", "id": "social_twitter",   "label": "Twitter / X" },
+      { "type": "url", "id": "social_pinterest", "label": "Pinterest" },
+      { "type": "url", "id": "social_tiktok",    "label": "TikTok" },
+      { "type": "url", "id": "social_youtube",   "label": "YouTube" }
+    ]
+  },
+  {
+    "name": "Currency",
+    "settings": [
+      { "type": "checkbox", "id": "currency_code_enabled", "label": "Show currency code", "default": false }
+    ]
+  },
+  {
+    "name": "Animations",
+    "settings": [
+      { "type": "checkbox", "id": "animations_enabled", "label": "Enable scroll animations", "default": true }
+    ]
+  }
+]

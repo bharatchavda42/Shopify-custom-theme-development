@@ -1,0 +1,32 @@
+{
+  "current": {
+    "colors_primary":          "#FFAA01",
+    "colors_secondary":        "#4A4A4A",
+    "colors_background":       "#FFFFFF",
+    "colors_background_alt":   "#F7F7F7",
+    "colors_text":             "#4A4A4A",
+    "colors_heading":          "#1A1A1A",
+    "colors_border":           "#E8E8E8",
+    "colors_button_bg":        "#1A1A1A",
+    "colors_button_text":      "#FFFFFF",
+    "colors_sale":             "#1A1A1A",
+    "type_heading_font":       { "family": "Albert Sans", "fallback": "sans-serif", "weight": "700", "style": "normal" },
+    "type_body_font":          { "family": "DM Sans",     "fallback": "sans-serif", "weight": "500", "style": "normal" },
+    "type_base_size":          16,
+    "type_heading_transform":  "none",
+    "page_width":              1720,
+    "page_gutter":             100,
+    "button_radius":           0,
+    "button_style":            "filled",
+    "card_radius":             0,
+    "card_shadow":             "none",
+    "card_border":             false,
+    "cart_type":               "drawer",
+    "cart_free_shipping_bar":  true,
+    "cart_free_shipping_threshold": "100",
+    "predictive_search_enabled": true,
+    "currency_code_enabled":   false,
+    "animations_enabled":      true
+  },
+  "presets": {}
+}

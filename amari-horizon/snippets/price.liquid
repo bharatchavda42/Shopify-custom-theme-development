@@ -1,0 +1,32 @@
+{%- liquid
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  else
+    assign target = product
+  endif
+  assign compare = target.compare_at_price
+  assign price = target.price
+  assign money_price = price | money
+  if settings.currency_code_enabled
+    assign money_price = price | money_with_currency
+  endif
+-%}
+
+{%- if target.available -%}
+  <div class="price{% if compare > price %} price--on-sale{% endif %}">
+    <span class="price__current">{{ money_price }}</span>
+    {%- if compare > price -%}
+      <span class="price__compare">
+        {%- if settings.currency_code_enabled -%}
+          {{ compare | money_with_currency }}
+        {%- else -%}
+          {{ compare | money }}
+        {%- endif -%}
+      </span>
+    {%- endif -%}
+  </div>
+{%- else -%}
+  <div class="price">
+    <span class="price__current" style="color:var(--color-text-muted);">{{ 'products.product.sold_out' | t }}</span>
+  </div>
+{%- endif -%}

@@ -1,0 +1,42 @@
+{% layout 'theme' %}
+<section class="section">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-10);">
+      <h1 style="font-size:var(--text-h2);">{{ 'customer.account.title' | t }}</h1>
+      <a href="{{ routes.account_logout_url }}" class="btn btn--secondary">{{ 'customer.log_out' | t }}</a>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:var(--space-12);">
+      <div>
+        <h2 style="font-size:var(--text-h5);margin-bottom:var(--space-4);">Account Details</h2>
+        <p>{{ customer.name }}</p>
+        <p style="color:var(--color-text-muted);">{{ customer.email }}</p>
+        <a href="{{ routes.account_addresses_url }}" style="display:block;margin-top:var(--space-4);font-size:var(--text-sm);font-weight:var(--weight-bold);">Manage Addresses</a>
+      </div>
+      <div>
+        <h2 style="font-size:var(--text-h5);margin-bottom:var(--space-6);">{{ 'customer.orders.title' | t }}</h2>
+        {%- if customer.orders.size > 0 -%}
+          <table style="width:100%;border-collapse:collapse;">
+            <thead><tr style="border-bottom:2px solid var(--color-border);">
+              <th style="text-align:left;padding-bottom:var(--space-3);font-size:var(--text-sm);text-transform:uppercase;letter-spacing:var(--tracking-widest);">Order</th>
+              <th style="text-align:left;padding-bottom:var(--space-3);font-size:var(--text-sm);text-transform:uppercase;letter-spacing:var(--tracking-widest);">Date</th>
+              <th style="text-align:left;padding-bottom:var(--space-3);font-size:var(--text-sm);text-transform:uppercase;letter-spacing:var(--tracking-widest);">Status</th>
+              <th style="text-align:right;padding-bottom:var(--space-3);font-size:var(--text-sm);text-transform:uppercase;letter-spacing:var(--tracking-widest);">Total</th>
+            </tr></thead>
+            <tbody>
+              {%- for order in customer.orders -%}
+                <tr style="border-bottom:1px solid var(--color-border);">
+                  <td style="padding-block:var(--space-4);"><a href="{{ order.customer_url }}" style="font-weight:var(--weight-bold);">{{ order.name }}</a></td>
+                  <td style="padding-block:var(--space-4);color:var(--color-text-muted);">{{ order.created_at | date: '%B %d, %Y' }}</td>
+                  <td style="padding-block:var(--space-4);">{{ order.financial_status_label }}</td>
+                  <td style="padding-block:var(--space-4);text-align:right;font-weight:var(--weight-bold);">{{ order.total_price | money }}</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        {%- else -%}
+          <p style="color:var(--color-text-muted);">{{ 'customer.orders.none' | t }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+{%- unless template == 'index' -%}
+  <nav class="breadcrumbs" aria-label="{{ 'general.breadcrumbs.label' | t | default: 'Breadcrumbs' }}">
+    <a href="{{ routes.root_url }}" class="breadcrumbs__item">{{ 'general.breadcrumbs.home' | t | default: 'Home' }}</a>
+    <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+
+    {%- if template == 'product' -%}
+      {%- if collection -%}
+        <a href="{{ collection.url }}" class="breadcrumbs__item">{{ collection.title }}</a>
+        <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+      {%- endif -%}
+      <span class="breadcrumbs__item" aria-current="page">{{ product.title | truncate: 50 }}</span>
+
+    {%- elsif template == 'collection' -%}
+      <span class="breadcrumbs__item" aria-current="page">{{ collection.title }}</span>
+
+    {%- elsif template == 'page' -%}
+      <span class="breadcrumbs__item" aria-current="page">{{ page.title }}</span>
+
+    {%- elsif template == 'article' -%}
+      <a href="{{ blog.url }}" class="breadcrumbs__item">{{ blog.title }}</a>
+      <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+      <span class="breadcrumbs__item" aria-current="page">{{ article.title | truncate: 50 }}</span>
+
+    {%- elsif template == 'cart' -%}
+      <span class="breadcrumbs__item" aria-current="page">{{ 'sections.cart.title' | t }}</span>
+
+    {%- elsif template == 'search' -%}
+      <span class="breadcrumbs__item" aria-current="page">{{ 'general.search.title' | t }}</span>
+    {%- endif -%}
+  </nav>
+{%- endunless -%}

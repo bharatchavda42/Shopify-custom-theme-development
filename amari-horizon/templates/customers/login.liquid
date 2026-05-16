@@ -1,0 +1,25 @@
+{% layout 'theme' %}
+<section class="section">
+  <div class="container container--narrow" style="max-width:480px;text-align:center;">
+    <h1 style="font-size:var(--text-h2);margin-bottom:var(--space-8);">{{ 'customer.login.title' | t }}</h1>
+    {%- form 'customer_login' -%}
+      {{ form.errors | default_errors }}
+      <div class="field" style="margin-bottom:var(--space-4);text-align:left;">
+        <label class="field__label" for="CustomerEmail">{{ 'customer.login.email' | t }}</label>
+        <input class="field__input" type="email" name="customer[email]" id="CustomerEmail" autocomplete="email" required>
+      </div>
+      <div class="field" style="margin-bottom:var(--space-6);text-align:left;">
+        <label class="field__label" for="CustomerPassword">{{ 'customer.login.password' | t }}</label>
+        <input class="field__input" type="password" name="customer[password]" id="CustomerPassword" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn btn--primary btn--full btn--lg">{{ 'customer.login.submit' | t }}</button>
+      <p style="margin-top:var(--space-5);font-size:var(--text-sm);color:var(--color-text-muted);">
+        <a href="{{ routes.new_customer_address_url }}">{{ 'customer.login.forgot_password' | t }}</a>
+      </p>
+    {%- endform -%}
+    <p style="margin-top:var(--space-8);font-size:var(--text-sm);">
+      {{ 'customer.login.create_account' | t }}
+      <a href="{{ routes.account_register_url }}" style="font-weight:var(--weight-bold);">{{ 'customer.register.title' | t }}</a>
+    </p>
+  </div>
+</section>

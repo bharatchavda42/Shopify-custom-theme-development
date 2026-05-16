@@ -1,0 +1,75 @@
+<div class="cart-drawer" id="CartDrawer" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" aria-hidden="true">
+  <div class="cart-drawer__overlay" id="CartOverlay"></div>
+  <div class="cart-drawer__panel">
+    <div class="cart-drawer__header">
+      <h2 class="cart-drawer__title">{{ 'sections.cart.title' | t }} (<span id="DrawerCartCount">{{ cart.item_count }}</span>)</h2>
+      <button class="cart-drawer__close" id="CartDrawerClose" aria-label="{{ 'accessibility.close' | t }}">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M1 1l18 18M19 1L1 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <div class="cart-drawer__body" id="CartDrawerItems">
+      {%- if cart.item_count > 0 -%}
+        {%- for item in cart.items -%}
+          <div class="cart-item" id="DrawerCartItem-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}">
+            <img class="cart-item__image"
+                 src="{{ item.image | image_url: width: 160 }}"
+                 alt="{{ item.image.alt | default: item.product.title }}"
+                 loading="lazy" width="80" height="80">
+            <div class="cart-item__info">
+              <span class="cart-item__vendor">{{ item.vendor }}</span>
+              <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title }}</a>
+              {%- unless item.product.has_only_default_variant -%}
+                <span class="cart-item__variant">{{ item.variant.title }}</span>
+              {%- endunless -%}
+              <div class="cart-item__actions">
+                <div style="display:flex;align-items:center;gap:var(--space-2);">
+                  <button class="qty-minus" data-index="{{ item.index | plus: 1 }}" aria-label="Decrease">−</button>
+                  <span style="min-width:32px;text-align:center;font-weight:var(--weight-bold);" id="DrawerQty-{{ item.index | plus: 1 }}">{{ item.quantity }}</span>
+                  <button class="qty-plus" data-index="{{ item.index | plus: 1 }}" aria-label="Increase">+</button>
+                </div>
+                <span style="font-weight:var(--weight-bold);">{{ item.final_line_price | money }}</span>
+              </div>
+              <button class="cart-item__remove" data-index="{{ item.index | plus: 1 }}">{{ 'sections.cart.remove' | t }}</button>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div style="text-align:center;padding:var(--space-12) 0;color:var(--color-text-muted);">
+          <p style="font-size:var(--text-lg);margin-bottom:var(--space-6);">{{ 'sections.cart.empty' | t }}</p>
+          <button id="CartDrawerClose2" class="btn btn--secondary">Continue Shopping</button>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <div class="cart-drawer__footer">
+        {%- if settings.cart_free_shipping_bar -%}
+          {%- assign threshold = settings.cart_free_shipping_threshold | times: 100 -%}
+          {%- assign remaining = threshold | minus: cart.total_price -%}
+          {%- if remaining > 0 -%}
+            <div style="margin-bottom:var(--space-4);padding:var(--space-3);background:var(--color-bg-alt);font-size:var(--text-sm);text-align:center;">
+              Spend {{ remaining | money }} more for free shipping!
+              <div style="height:4px;background:var(--color-border);margin-top:var(--space-2);border-radius:var(--radius-full);">
+                <div style="height:100%;width:{{ cart.total_price | times: 100 | divided_by: threshold }}%;background:var(--color-primary);border-radius:var(--radius-full);max-width:100%;"></div>
+              </div>
+            </div>
+          {%- else -%}
+            <p style="text-align:center;font-size:var(--text-sm);color:var(--color-success);margin-bottom:var(--space-4);">✓ You qualify for free shipping!</p>
+          {%- endif -%}
+        {%- endif -%}
+        <div class="cart-drawer__total">
+          <span>{{ 'sections.cart.subtotal' | t }}</span>
+          <span id="DrawerCartTotal">{{ cart.total_price | money }}</span>
+        </div>
+        <a href="{{ routes.checkout }}" class="btn btn--primary btn--full btn--lg">{{ 'sections.cart.checkout' | t }}</a>
+        <a href="{{ routes.cart_url }}" style="display:block;text-align:center;margin-top:var(--space-3);font-size:var(--text-sm);color:var(--color-text-muted);">View Full Cart</a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .qty-minus,.qty-plus{width:28px;height:28px;border:1px solid var(--color-border);background:transparent;cursor:pointer;font-size:var(--text-lg);display:flex;align-items:center;justify-content:center;}
+  .qty-minus:hover,.qty-plus:hover{background:var(--color-bg-alt);}
+</style>

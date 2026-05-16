@@ -1,0 +1,20 @@
+{% layout 'theme' %}
+<section class="section">
+  <div class="container">
+    <h1 style="font-size:var(--text-h2);margin-bottom:var(--space-10);">{{ 'customer.addresses.title' | t }}</h1>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--space-8);">
+      {%- for address in customer.addresses -%}
+        <div style="border:1px solid var(--color-border);padding:var(--space-6);">
+          {%- if address == customer.default_address -%}
+            <span class="badge badge--bestseller" style="margin-bottom:var(--space-4);">Default</span>
+          {%- endif -%}
+          {{ address | format_address }}
+          <div style="margin-top:var(--space-4);display:flex;gap:var(--space-3);">
+            <a href="{{ routes.account_addresses_url }}/{{ address.id }}/edit" class="btn btn--secondary btn--sm">Edit</a>
+            <button onclick="if(confirm('Delete this address?')) Shopify.CustomerAddress.destroy('{{ address.id }}')" class="btn btn--sm" style="color:var(--color-error);border:1px solid var(--color-error);">Delete</button>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

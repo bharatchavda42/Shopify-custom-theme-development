@@ -1,0 +1,116 @@
+{
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "show_announcement": true,
+        "text": "Free shipping on orders over $100 — Shop New Arrivals",
+        "bg_color": "#1A1A1A",
+        "text_color": "#FFFFFF"
+      }
+    },
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "label": "FASHION & STYLE",
+        "heading": "Luxurious",
+        "button_label": "Shop Now",
+        "button_link": "/collections/all",
+        "show_overlay": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "ticker": {
+      "type": "ticker-banner",
+      "block_order": ["item1","item2","item3"],
+      "blocks": {
+        "item1": { "type": "item", "settings": { "text": "Get Up To 40% Off", "show_spark": true } },
+        "item2": { "type": "item", "settings": { "text": "NEW ARRIVAL", "show_spark": true } },
+        "item3": { "type": "item", "settings": { "text": "Free Shipping on Orders $100+", "show_spark": true } }
+      }
+    },
+    "new_arrivals": {
+      "type": "featured-collection",
+      "settings": {
+        "label": "28 ITEMS",
+        "heading": "NEW ARRIVAL",
+        "products_to_show": 4,
+        "view_all_label": "VIEW ALL"
+      }
+    },
+    "image_text": {
+      "type": "image-with-text",
+      "settings": {
+        "image_position": "left",
+        "label": "lightweight essentials",
+        "heading": "Move Freely. Dress Bold.",
+        "text": "<p>Discover our lightweight essentials crafted for comfort and style.</p>",
+        "button_label": "Explore Collection",
+        "button_link": "/collections/all"
+      }
+    },
+    "community": {
+      "type": "featured-collection",
+      "settings": {
+        "label": "123 ITEMS",
+        "heading": "COMMUNITY FAVOURITES",
+        "products_to_show": 8,
+        "view_all_label": "VIEW ALL"
+      }
+    },
+    "promo": {
+      "type": "promo-banners",
+      "block_order": ["banner1","banner2"],
+      "blocks": {
+        "banner1": { "type": "banner", "settings": { "label": "Hurry up!", "title": "Sale is Live", "button_label": "Shop Sale" } },
+        "banner2": { "type": "banner", "settings": { "label": "Winter Collection", "title": "NEW ARRIVAL", "button_label": "Explore Now" } }
+      }
+    },
+    "brands": {
+      "type": "brand-logos",
+      "block_order": ["l1","l2","l3","l4","l5"],
+      "blocks": {
+        "l1": { "type": "logo", "settings": {} },
+        "l2": { "type": "logo", "settings": {} },
+        "l3": { "type": "logo", "settings": {} },
+        "l4": { "type": "logo", "settings": {} },
+        "l5": { "type": "logo", "settings": {} }
+      },
+      "settings": { "heading": "Our Brands" }
+    },
+    "video_section": {
+      "type": "video",
+      "settings": { "heading": "Fashion in Motion" }
+    },
+    "features": {
+      "type": "icon-features",
+      "block_order": ["f1","f2","f3","f4"],
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "icon": "🚚", "heading": "Free Shipping", "text": "On orders over $100" } },
+        "f2": { "type": "feature", "settings": { "icon": "↩️", "heading": "Easy Returns", "text": "30-day hassle-free returns" } },
+        "f3": { "type": "feature", "settings": { "icon": "🔒", "heading": "Secure Payment", "text": "100% secure checkout" } },
+        "f4": { "type": "feature", "settings": { "icon": "💬", "heading": "24/7 Support", "text": "We're here to help" } }
+      },
+      "settings": { "columns": 4 }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "block_order": ["r1","r2","r3"],
+      "blocks": {
+        "r1": { "type": "review", "settings": { "rating": 5, "review": "Absolutely love the quality! The fit is perfect.", "name": "Sarah M.", "role": "Verified Buyer" } },
+        "r2": { "type": "review", "settings": { "rating": 5, "review": "Amazing fabric and great shipping speed!", "name": "James K.", "role": "Verified Buyer" } },
+        "r3": { "type": "review", "settings": { "rating": 5, "review": "Best fashion brand I've found online.", "name": "Priya R.", "role": "Verified Buyer" } }
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Join Our Community",
+        "subtext": "Subscribe for exclusive offers, new arrivals, and style inspiration.",
+        "button_label": "Subscribe"
+      }
+    }
+  },
+  "order": ["announcement","hero","ticker","new_arrivals","image_text","community","promo","brands","video_section","features","testimonials","newsletter"]
+}

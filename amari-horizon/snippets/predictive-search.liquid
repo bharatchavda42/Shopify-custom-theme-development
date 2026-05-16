@@ -1,0 +1,39 @@
+<div class="predictive-search" id="PredictiveSearch" role="dialog" aria-hidden="true" aria-label="{{ 'general.search.title' | t }}">
+  <div class="predictive-search__overlay" id="SearchOverlay"></div>
+  <div class="predictive-search__panel">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-6) var(--page-gutter);border-bottom:1px solid var(--color-border);">
+      <h2 style="font-size:var(--text-h5);font-weight:var(--weight-bold);">{{ 'general.search.title' | t }}</h2>
+      <button id="SearchClose" aria-label="{{ 'accessibility.close' | t }}">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M1 1l18 18M19 1L1 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div style="padding:var(--space-6) var(--page-gutter);">
+      <div class="search-form">
+        <input class="search-form__input"
+               id="SearchInput"
+               type="search"
+               autocomplete="off"
+               placeholder="{{ 'general.search.placeholder' | t }}"
+               role="combobox"
+               aria-expanded="false"
+               aria-owns="SearchResults"
+               aria-autocomplete="list">
+        <button class="search-form__submit" type="button" aria-label="{{ 'general.search.search' | t }}">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="8.5" cy="8.5" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="M13.5 13.5L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div id="SearchResults" role="listbox" style="margin-top:var(--space-4);"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .predictive-search { position:fixed; inset:0; z-index:var(--z-modal); visibility:hidden; }
+  .predictive-search.is-open { visibility:visible; }
+  .predictive-search__overlay { position:absolute; inset:0; background:var(--color-overlay); opacity:0; transition:opacity var(--transition-base); }
+  .predictive-search.is-open .predictive-search__overlay { opacity:1; }
+  .predictive-search__panel { position:absolute; top:0; left:0; right:0; background:var(--color-bg); transform:translateY(-100%); transition:transform var(--transition-base); max-height:80vh; overflow-y:auto; }
+  .predictive-search.is-open .predictive-search__panel { transform:translateY(0); }
+</style>
+
+<script src="{{ 'predictive-search.js' | asset_url }}" defer></script>

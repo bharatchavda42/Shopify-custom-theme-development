@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- if settings.favicon -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">
+  {%- endif -%}
+
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <!-- Google Fonts: Albert Sans (headings) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  {{ content_for_header }}
+
+  {{ 'tokens.css' | asset_url | stylesheet_tag }}
+  {{ 'base.css'   | asset_url | stylesheet_tag }}
+  {{ 'theme.css'  | asset_url | stylesheet_tag }}
+
+  <style>
+    :root {
+      --color-primary:        {{ settings.colors_primary }};
+      --color-secondary:      {{ settings.colors_secondary }};
+      --color-bg:             {{ settings.colors_background }};
+      --color-text:           {{ settings.colors_text }};
+      --color-heading:        {{ settings.colors_heading }};
+      --color-border:         {{ settings.colors_border }};
+      --color-btn-primary-bg:   {{ settings.colors_button_bg }};
+      --color-btn-primary-text: {{ settings.colors_button_text }};
+      --page-width:           {{ settings.page_width }}px;
+      --page-gutter:          {{ settings.page_gutter }}px;
+      --radius-btn:           {{ settings.button_radius }}px;
+      --font-heading: {{ settings.type_heading_font.family | json }}, {{ settings.type_heading_font.fallback_families }};
+      --font-body:    {{ settings.type_body_font.family | json }}, {{ settings.type_body_font.fallback_families }};
+    }
+    {{ settings.type_heading_font | font_face: font_display: 'swap' }}
+    {{ settings.type_body_font | font_face: font_display: 'swap' }}
+  </style>
+</head>
+
+<body class="template-{{ template.name }}{% if customer %} customer-logged-in{% endif %}{% if settings.animations_enabled %} animations-enabled{% endif %}">
+  <a class="skip-link visually-hidden" href="#MainContent">{{ 'accessibility.skip_to_text' | t }}</a>
+
+  {%- sections 'header-group' -%}
+
+  <main id="MainContent" class="main-content" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {%- sections 'footer-group' -%}
+
+  {%- render 'cart-drawer' -%}
+  {%- render 'predictive-search' -%}
+
+  <script>
+    window.theme = {
+      cartType: {{ settings.cart_type | json }},
+      predictiveSearch: {{ settings.predictive_search_enabled | json }},
+      animations: {{ settings.animations_enabled | json }},
+      moneyFormat: {{ shop.money_format | json }}
+    };
+  </script>
+
+  {{ 'theme.js' | asset_url | script_tag }}
+  {{ 'cart.js'  | asset_url | script_tag }}
+</body>
+</html>
