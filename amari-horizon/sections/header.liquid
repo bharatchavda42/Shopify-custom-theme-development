@@ -1,0 +1,180 @@
+{% comment %} Section: Header — Amari Horizon {% endcomment %}
+
+{{ 'section-header.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign main_menu = section.settings.menu | default: 'main-menu'
+  assign logo_width = section.settings.logo_width
+  assign sticky = section.settings.sticky_header
+-%}
+
+<header
+  class="site-header{% if sticky %} site-header--sticky{% endif %}"
+  id="shopify-section-{{ section.id }}"
+  role="banner"
+  style="
+    --header-bg: {{ section.settings.header_bg }};
+    --header-text: {{ section.settings.header_text_color }};
+    --header-height: {{ section.settings.header_height }}px;
+    --logo-width: {{ logo_width }}px;
+  "
+>
+  <div class="site-header__inner">
+
+    <!-- Left nav -->
+    <nav class="site-header__nav site-header__nav--left" role="navigation" aria-label="{{ 'accessibility.nav_main' | t }}">
+      <ul class="site-header__nav-list" role="list">
+        {%- for link in linklists[main_menu].links -%}
+          <li class="site-header__nav-item{% if link.active %} is-active{% endif %}">
+            <a
+              href="{{ link.url }}"
+              class="site-header__nav-link"
+              {% if link.current %}aria-current="page"{% endif %}
+            >{{ link.title }}</a>
+            {%- if link.links.size > 0 -%}
+              <ul class="site-header__dropdown" role="list">
+                {%- for child in link.links -%}
+                  <li><a href="{{ child.url }}" class="site-header__dropdown-link">{{ child.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- else -%}
+          <li class="site-header__nav-item"><a href="/" class="site-header__nav-link">Home</a></li>
+          <li class="site-header__nav-item"><a href="/collections/all" class="site-header__nav-link">Shop</a></li>
+          <li class="site-header__nav-item"><a href="/pages/about" class="site-header__nav-link">About Us</a></li>
+          <li class="site-header__nav-item"><a href="/pages/contact" class="site-header__nav-link">Contact Us</a></li>
+          <li class="site-header__nav-item"><a href="/pages/faq" class="site-header__nav-link">FAQs</a></li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <!-- Logo (center) -->
+    <div class="site-header__logo-wrap">
+      <a href="{{ routes.root_url }}" class="site-header__logo-link" aria-label="{{ shop.name }}">
+        {%- if section.settings.logo != blank -%}
+          {{
+            section.settings.logo
+            | image_url: width: logo_width
+            | image_tag:
+              class: 'site-header__logo-img',
+              loading: 'eager',
+              fetchpriority: 'high',
+              alt: shop.name,
+              width: logo_width
+          }}
+        {%- else -%}
+          <span class="site-header__logo-text">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+
+    <!-- Right icons -->
+    <div class="site-header__icons">
+      {%- if section.settings.show_search -%}
+        <button
+          class="site-header__icon-btn"
+          id="SearchToggle"
+          aria-label="Search"
+          aria-expanded="false"
+          aria-controls="SearchDrawer"
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="8.5" cy="8.5" r="7.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M14 14L19 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      {%- endif -%}
+
+      {%- if section.settings.show_wishlist -%}
+        <a href="/pages/wishlist" class="site-header__icon-btn" aria-label="Wishlist">
+          <svg width="23" height="20" viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.5 18.5C11.5 18.5 1 12 1 5.5C1 2.99 3.01 1 5.5 1C7.5 1 9.2 2.3 11.5 5C13.8 2.3 15.5 1 17.5 1C19.99 1 22 2.99 22 5.5C22 12 11.5 18.5 11.5 18.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {%- endif -%}
+
+      <a href="{{ routes.cart_url }}" class="site-header__icon-btn site-header__cart-btn" aria-label="{{ 'sections.cart.title' | t }}" id="CartIconButton"
+        {%- if settings.cart_type == 'drawer' %} data-cart-toggle{%- endif -%}>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 18C7.55228 18 8 17.5523 8 17C8 16.4477 7.55228 16 7 16C6.44772 16 6 16.4477 6 17C6 17.5523 6.44772 18 7 18Z" fill="currentColor"/>
+          <path d="M15 18C15.5523 18 16 17.5523 16 17C16 16.4477 15.5523 16 15 16C14.4477 16 14 16.4477 14 17C14 17.5523 14.4477 18 15 18Z" fill="currentColor"/>
+          <path d="M1 1H3L5.68 13.39C5.77 13.85 6.02 14.26 6.39 14.56C6.75 14.85 7.21 15.01 7.68 15H14.72C15.19 15.01 15.65 14.85 16.01 14.56C16.38 14.26 16.63 13.85 16.72 13.39L18 7H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="site-header__cart-count" id="CartCount"
+          {%- if cart.item_count == 0 %} aria-hidden="true"{% endif -%}
+        >{{ cart.item_count }}</span>
+      </a>
+
+      {%- if section.settings.show_account -%}
+        {%- if customer -%}
+          <a href="{{ routes.account_url }}" class="site-header__icon-btn" aria-label="Account">
+        {%- else -%}
+          <a href="{{ routes.account_login_url }}" class="site-header__icon-btn" aria-label="Login">
+        {%- endif -%}
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M2 20C2 16.13 6.03 13 11 13C15.97 13 20 16.13 20 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </a>
+      {%- endif -%}
+
+      <!-- Mobile menu toggle -->
+      <button
+        class="site-header__icon-btn site-header__menu-toggle"
+        id="MobileMenuToggle"
+        aria-label="{{ 'sections.header.menu' | t }}"
+        aria-expanded="false"
+        aria-controls="MobileMenu"
+      >
+        <svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1H23M1 9H23M1 17H23" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu drawer -->
+  <div class="site-header__mobile-menu" id="MobileMenu" aria-hidden="true" aria-label="Mobile menu">
+    <button class="site-header__mobile-close" id="MobileMenuClose" aria-label="Close menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L19 19M19 1L1 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <nav>
+      <ul class="site-header__mobile-list" role="list">
+        {%- for link in linklists[main_menu].links -%}
+          <li><a href="{{ link.url }}" class="site-header__mobile-link">{{ link.title }}</a></li>
+        {%- else -%}
+          <li><a href="/" class="site-header__mobile-link">Home</a></li>
+          <li><a href="/collections/all" class="site-header__mobile-link">Shop</a></li>
+          <li><a href="/pages/about" class="site-header__mobile-link">About Us</a></li>
+          <li><a href="/pages/contact" class="site-header__mobile-link">Contact Us</a></li>
+          <li><a href="/pages/faq" class="site-header__mobile-link">FAQs</a></li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "header", "content": "Logo" },
+    { "type": "image_picker", "id": "logo", "label": "Logo image" },
+    { "type": "range", "id": "logo_width", "min": 80, "max": 300, "step": 10, "unit": "px", "label": "Logo width", "default": 150 },
+    { "type": "header", "content": "Navigation" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "header", "content": "Icons" },
+    { "type": "checkbox", "id": "show_search", "label": "Show search", "default": true },
+    { "type": "checkbox", "id": "show_wishlist", "label": "Show wishlist", "default": true },
+    { "type": "checkbox", "id": "show_account", "label": "Show account", "default": true },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "header_bg", "label": "Header background", "default": "#FFFFFF" },
+    { "type": "color", "id": "header_text_color", "label": "Text / icon color", "default": "#4A4A4A" },
+    { "type": "range", "id": "header_height", "min": 60, "max": 140, "step": 4, "unit": "px", "label": "Header height", "default": 96 },
+    { "type": "checkbox", "id": "sticky_header", "label": "Sticky on scroll", "default": true }
+  ]
+}
+{% endschema %}

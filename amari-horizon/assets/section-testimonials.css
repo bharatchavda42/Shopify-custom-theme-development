@@ -1,0 +1,116 @@
+/* ===================================================
+   TESTIMONIALS — Amari Horizon
+   =================================================== */
+
+.testimonials {
+  background-color: var(--tm-bg, #F7F7F7);
+  padding-top: var(--tm-padding-top, 80px);
+  padding-bottom: var(--tm-padding-bottom, 80px);
+}
+
+.testimonials__inner {
+  max-width: var(--page-width, 1720px);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter, 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+.testimonials__heading {
+  font-family: var(--font-heading, 'Albert Sans', sans-serif);
+  font-weight: 700;
+  font-size: clamp(28px, 3.5vw, 48px);
+  line-height: 1.2;
+  color: #4a4a4a;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.testimonials__subheading {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 18px;
+  color: #4a4a4a;
+  text-align: center;
+  margin: -30px 0 0;
+}
+
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  width: 100%;
+}
+
+@media screen and (min-width: 750px) {
+  .testimonials__grid {
+    grid-template-columns: repeat(var(--tm-columns, 3), 1fr);
+  }
+}
+
+.testimonials__card {
+  background-color: var(--tm-card-bg, #FFFFFF);
+  border-radius: var(--tm-card-radius, 12px);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.testimonials__stars {
+  display: flex;
+  gap: 4px;
+}
+
+.testimonials__star {
+  font-size: 20px;
+  color: var(--tm-star-color, #FFAA01);
+  line-height: 1;
+}
+
+.testimonials__star--empty {
+  color: #e0e0e0;
+}
+
+.testimonials__review {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--tm-text-color, #4A4A4A);
+  margin: 0;
+  flex: 1;
+}
+
+.testimonials__author {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-top: 1px solid #E8E8E8;
+  padding-top: 16px;
+  margin-top: auto;
+}
+
+.testimonials__name {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-weight: 700;
+  font-size: 16px;
+  color: #1A1A1A;
+  margin: 0;
+}
+
+.testimonials__role {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-weight: 500;
+  font-size: 14px;
+  color: #4a4a4a;
+  margin: 0;
+}
+
+@media screen and (max-width: 749px) {
+  .testimonials__inner {
+    padding: 0 20px;
+  }
+}

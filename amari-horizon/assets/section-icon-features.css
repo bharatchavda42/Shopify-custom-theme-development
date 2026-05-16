@@ -1,0 +1,90 @@
+/* ===================================================
+   ICON FEATURES — Amari Horizon
+   =================================================== */
+
+.icon-features {
+  background-color: var(--if-bg, #FFFFFF);
+  padding-top: var(--if-padding-top, 60px);
+  padding-bottom: var(--if-padding-bottom, 60px);
+  border-top: 1px solid #E8E8E8;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.icon-features__inner {
+  max-width: var(--page-width, 1720px);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter, 100px);
+}
+
+.icon-features__section-heading {
+  font-family: var(--font-heading, 'Albert Sans', sans-serif);
+  font-weight: 700;
+  font-size: clamp(24px, 3vw, 48px);
+  line-height: 1.2;
+  text-align: center;
+  color: var(--if-heading-color, #1A1A1A);
+  text-transform: uppercase;
+  margin: 0 0 48px;
+}
+
+.icon-features__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px 24px;
+}
+
+@media screen and (min-width: 750px) {
+  .icon-features__grid {
+    grid-template-columns: repeat(var(--if-columns, 4), 1fr);
+  }
+}
+
+.icon-features__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.icon-features__icon {
+  color: var(--if-icon-color, #FFAA01);
+  font-size: var(--if-icon-size, 48px);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-features__icon svg {
+  width: var(--if-icon-size, 48px);
+  height: var(--if-icon-size, 48px);
+}
+
+.icon-features__icon--emoji {
+  font-size: var(--if-icon-size, 48px);
+}
+
+.icon-features__heading {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.3;
+  color: var(--if-heading-color, #1A1A1A);
+  margin: 0;
+}
+
+.icon-features__text {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--if-text-color, #4A4A4A);
+  margin: 0;
+}
+
+@media screen and (max-width: 749px) {
+  .icon-features__inner {
+    padding: 0 20px;
+  }
+}

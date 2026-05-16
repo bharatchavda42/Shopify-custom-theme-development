@@ -1,0 +1,106 @@
+{% comment %} Section: Testimonials — Amari Horizon {% endcomment %}
+
+{{ 'section-testimonials.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="testimonials"
+  id="shopify-section-{{ section.id }}"
+  style="
+    --tm-padding-top: {{ section.settings.padding_top }}px;
+    --tm-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --tm-bg: {{ section.settings.bg_color }};
+    --tm-card-bg: {{ section.settings.card_bg }};
+    --tm-star-color: {{ section.settings.star_color }};
+    --tm-text-color: {{ section.settings.text_color }};
+    --tm-columns: {{ section.settings.columns }};
+    --tm-card-radius: {{ section.settings.card_radius }}px;
+  "
+>
+  <div class="page-width testimonials__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="testimonials__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="testimonials__subheading">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    <div class="testimonials__grid">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'review' -%}
+            <div class="testimonials__card" {{ block.shopify_attributes }}>
+              <div class="testimonials__stars" aria-label="{{ block.settings.rating }} out of 5 stars">
+                {%- for i in (1..5) -%}
+                  <span class="testimonials__star{% if forloop.index > block.settings.rating %} testimonials__star--empty{% endif %}">★</span>
+                {%- endfor -%}
+              </div>
+              {%- if block.settings.review != blank -%}
+                <p class="testimonials__review">"{{ block.settings.review }}"</p>
+              {%- endif -%}
+              <div class="testimonials__author">
+                {%- if block.settings.name != blank -%}
+                  <p class="testimonials__name">{{ block.settings.name }}</p>
+                {%- endif -%}
+                {%- if block.settings.role != blank -%}
+                  <p class="testimonials__role">{{ block.settings.role }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "class": "section-testimonials",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What Our Customers Say" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading" },
+    { "type": "range", "id": "columns", "min": 1, "max": 4, "step": 1, "label": "Columns (desktop)", "default": 3 },
+    { "type": "range", "id": "card_radius", "min": 0, "max": 40, "step": 4, "unit": "px", "label": "Card radius", "default": 12 },
+    { "type": "color", "id": "bg_color", "label": "Section background", "default": "#F7F7F7" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#FFFFFF" },
+    { "type": "color", "id": "star_color", "label": "Star color", "default": "#FFAA01" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#4A4A4A" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Padding top", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Padding bottom", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "range", "id": "rating", "min": 1, "max": 5, "step": 1, "label": "Star rating", "default": 5 },
+        { "type": "textarea", "id": "review", "label": "Review text", "default": "Absolutely love the quality! The fit is perfect and the fabric is amazing." },
+        { "type": "text", "id": "name", "label": "Customer name", "default": "Sarah M." },
+        { "type": "text", "id": "role", "label": "Customer role / tag", "default": "Verified Buyer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "settings": {
+        "heading": "What Our Customers Say",
+        "columns": 3,
+        "card_radius": 12,
+        "bg_color": "#F7F7F7",
+        "card_bg": "#FFFFFF",
+        "star_color": "#FFAA01",
+        "text_color": "#4A4A4A",
+        "padding_top": 80,
+        "padding_bottom": 80
+      },
+      "blocks": [
+        { "type": "review", "settings": { "rating": 5, "review": "Absolutely love the quality! The fit is perfect.", "name": "Sarah M.", "role": "Verified Buyer" } },
+        { "type": "review", "settings": { "rating": 5, "review": "Amazing fabric and great shipping speed!", "name": "James K.", "role": "Verified Buyer" } },
+        { "type": "review", "settings": { "rating": 5, "review": "Best fashion brand I've found online.", "name": "Priya R.", "role": "Verified Buyer" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,120 @@
+/* ===================================================
+   BRAND LOGOS — Amari Horizon
+   =================================================== */
+
+.brand-logos {
+  padding-top: var(--bl-padding-top, 60px);
+  padding-bottom: var(--bl-padding-bottom, 60px);
+}
+
+.brand-logos__inner {
+  max-width: var(--page-width, 1720px);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter, 100px);
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  align-items: center;
+}
+
+.brand-logos__heading {
+  font-family: var(--font-heading, 'Albert Sans', sans-serif);
+  font-weight: 700;
+  font-size: clamp(24px, 3vw, 48px);
+  line-height: 57.6px;
+  color: #4a4a4a;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+}
+
+/* Strip */
+.brand-logos__strip {
+  background-color: var(--bl-strip-bg, #b5d0e1);
+  width: 100vw;
+  margin-left: calc(-1 * var(--page-gutter, 100px));
+  overflow: hidden;
+  padding: 30px 0;
+}
+
+/* Scrolling mode */
+.brand-logos__track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  width: max-content;
+  animation: bl-scroll 30s linear infinite;
+  gap: var(--bl-gap, 100px);
+}
+
+@keyframes bl-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Static grid mode */
+.brand-logos__grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--bl-gap, 100px);
+  padding: 0 var(--page-gutter, 100px);
+}
+
+.brand-logos__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.brand-logos__logo {
+  height: var(--bl-logo-height, 50px);
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: grayscale(0);
+  transition: filter 0.25s ease, opacity 0.25s ease;
+}
+
+.brand-logos__logo:hover {
+  filter: none;
+  opacity: 0.8;
+}
+
+.brand-logos__logo-text {
+  font-family: var(--font-heading, 'Albert Sans', sans-serif);
+  font-weight: 700;
+  font-size: 24px;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Responsive */
+@media screen and (max-width: 749px) {
+  .brand-logos__inner {
+    padding: 0 20px;
+  }
+
+  .brand-logos__strip {
+    margin-left: -20px;
+  }
+
+  .brand-logos__heading {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .brand-logos__grid {
+    gap: 40px;
+    padding: 0 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-logos__track {
+    animation: none;
+  }
+}

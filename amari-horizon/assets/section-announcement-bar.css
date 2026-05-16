@@ -1,0 +1,29 @@
+/* ===================================================
+   ANNOUNCEMENT BAR — Amari Horizon
+   =================================================== */
+
+.announcement-bar {
+  background-color: var(--ab-bg, #1A1A1A);
+  color: var(--ab-color, #FFFFFF);
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.announcement-bar__text {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-weight: 500;
+  font-size: var(--ab-font-size, 14px);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.announcement-bar__link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.announcement-bar__link:hover {
+  opacity: 0.75;
+}

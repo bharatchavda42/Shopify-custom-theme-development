@@ -1,0 +1,46 @@
+/* ===================================================
+   TICKER BANNER — Amari Horizon
+   =================================================== */
+
+.ticker-banner {
+  background-color: var(--ticker-bg, #1A1A1A);
+  color: var(--ticker-color, #FFFFFF);
+  overflow: hidden;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.ticker-banner__track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: ticker-scroll var(--ticker-speed, 30s) linear infinite;
+  width: max-content;
+}
+
+.ticker-banner__item {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-weight: 500;
+  font-size: var(--ticker-font-size, 14px);
+  line-height: 1;
+  padding: 0 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ticker-banner__spark {
+  margin: 0 8px;
+  color: var(--color-primary, #FFAA01);
+  font-size: 12px;
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.333%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-banner__track {
+    animation: none;
+  }
+}

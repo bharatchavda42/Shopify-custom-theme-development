@@ -1,0 +1,236 @@
+/* ===================================================
+   FASHION IN MOTION — Amari Horizon
+   =================================================== */
+
+.fashion-motion {
+  background-color: var(--fm-bg, #FFFFFF);
+  padding-top: var(--fm-padding-top, 80px);
+  padding-bottom: var(--fm-padding-bottom, 80px);
+  overflow: hidden;
+}
+
+.fashion-motion__inner {
+  max-width: var(--page-width, 1720px);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter, 100px);
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  align-items: center;
+}
+
+.fashion-motion__heading {
+  font-family: var(--font-heading, 'Albert Sans', sans-serif);
+  font-weight: 700;
+  font-size: clamp(28px, 3.5vw, 48px);
+  line-height: 57.6px;
+  color: #4a4a4a;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+}
+
+/* Scrolling track */
+.fashion-motion__scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+
+.fashion-motion__scroll-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.fashion-motion__scroll-wrapper:active {
+  cursor: grabbing;
+}
+
+.fashion-motion__track {
+  display: flex;
+  gap: 30px;
+  width: max-content;
+  padding-bottom: 8px;
+}
+
+/* Card */
+.fashion-motion__card {
+  position: relative;
+  width: 306px;
+  height: 543px;
+  border-radius: var(--fm-card-radius, 20px);
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.fashion-motion__card-media {
+  position: absolute;
+  inset: 0;
+}
+
+.fashion-motion__card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.5s ease;
+}
+
+.fashion-motion__card:hover .fashion-motion__card-img {
+  transform: scale(1.04);
+}
+
+.fashion-motion__card-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #f8f8fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fashion-motion__card-placeholder .placeholder-svg {
+  width: 50%;
+  height: 50%;
+  opacity: 0.4;
+}
+
+.fashion-motion__card-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.65) 100%);
+  pointer-events: none;
+}
+
+.fashion-motion__card-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(-40px);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.fashion-motion__card:hover .fashion-motion__card-play {
+  opacity: 1;
+}
+
+/* Card info (bottom overlay) */
+.fashion-motion__card-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(74, 74, 74, 0.5);
+  backdrop-filter: blur(4px);
+  padding: 20px;
+  border-radius: 0 0 var(--fm-card-radius, 20px) var(--fm-card-radius, 20px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.fashion-motion__card-thumb {
+  flex-shrink: 0;
+  width: 58px;
+  height: 80px;
+  background: #f8f8fa;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.fashion-motion__thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fashion-motion__thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #e0e0e0;
+}
+
+.fashion-motion__card-meta {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.fashion-motion__product-name,
+.fashion-motion__product-price {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21.6px;
+  color: #fff;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fashion-motion__card-cta {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a4a4a;
+  transition: background 0.2s ease;
+}
+
+.fashion-motion__card-cta:hover {
+  background: var(--color-primary, #FFAA01);
+  color: #fff;
+}
+
+/* Dots */
+.fashion-motion__dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.fashion-motion__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.fashion-motion__dot.is-active {
+  background: #4a4a4a;
+  transform: scale(1.3);
+}
+
+/* Responsive */
+@media screen and (max-width: 749px) {
+  .fashion-motion__inner {
+    padding: 0 20px;
+  }
+
+  .fashion-motion__card {
+    width: 240px;
+    height: 420px;
+  }
+
+  .fashion-motion__heading {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+}

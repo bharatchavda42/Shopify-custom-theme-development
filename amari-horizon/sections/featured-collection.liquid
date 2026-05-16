@@ -1,0 +1,152 @@
+{% comment %} Section: Featured Collection — Amari Horizon {% endcomment %}
+
+{%- liquid
+  assign col = section.settings.collection
+  assign pcount = section.settings.products_to_show
+  assign heading = section.settings.heading
+  assign label = section.settings.label
+  assign view_all = section.settings.view_all_label
+  assign cols_desktop = section.settings.columns_desktop
+  assign cols_mobile  = section.settings.columns_mobile
+  assign show_countdown = section.settings.show_countdown
+-%}
+
+{{ 'section-featured-collection.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="featured-collection"
+  id="shopify-section-{{ section.id }}"
+  style="
+    --fc-padding-top: {{ section.settings.padding_top }}px;
+    --fc-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --fc-cols-desktop: {{ cols_desktop }};
+    --fc-cols-mobile: {{ cols_mobile }};
+    --fc-gap: {{ section.settings.card_gap }}px;
+    --fc-card-radius: {{ section.settings.card_radius }}px;
+    --fc-bg: {{ section.settings.section_bg }};
+  "
+>
+  <div class="page-width featured-collection__inner">
+
+    <div class="featured-collection__header">
+      <div class="featured-collection__header-left">
+        {%- if label != blank -%}
+          <p class="featured-collection__label">{{ label }}</p>
+        {%- endif -%}
+        <h2 class="featured-collection__heading">{{ heading }}</h2>
+      </div>
+      {%- if view_all != blank and col != blank -%}
+        <a href="{{ col.url }}" class="featured-collection__view-all">{{ view_all }}</a>
+      {%- endif -%}
+    </div>
+
+    <div class="featured-collection__grid">
+      {%- if col != blank -%}
+        {%- for product in col.products limit: pcount -%}
+          <div class="featured-collection__card-wrap">
+            {%- render 'product-card',
+              product: product,
+              show_countdown: show_countdown,
+              card_radius: section.settings.card_radius
+            -%}
+          </div>
+        {%- else -%}
+          {%- for i in (1..pcount) -%}
+            <div class="featured-collection__card-wrap">
+              <div class="product-card product-card--placeholder">
+                <div class="product-card__media">
+                  {{ 'product-apparel-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+                <div class="product-card__info">
+                  <p class="product-card__vendor">BRAND NAME</p>
+                  <p class="product-card__title">Product Title</p>
+                  <p class="product-card__price">$00.00</p>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..pcount) -%}
+          <div class="featured-collection__card-wrap">
+            <div class="product-card product-card--placeholder">
+              <div class="product-card__media">
+                {{ 'product-apparel-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+              <div class="product-card__info">
+                <p class="product-card__vendor">BRAND NAME</p>
+                <p class="product-card__title">Product Title</p>
+                <p class="product-card__price">$00.00</p>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_nav_arrows -%}
+      <div class="featured-collection__nav">
+        <button class="featured-collection__nav-btn featured-collection__nav-btn--prev" aria-label="Previous">
+          <svg width="41" height="30" viewBox="0 0 41 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 15H40M15 1L1 15L15 29" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </button>
+        <button class="featured-collection__nav-btn featured-collection__nav-btn--next" aria-label="Next">
+          <svg width="41" height="30" viewBox="0 0 41 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M41 15H1M26 1L40 15L26 29" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "tag": "section",
+  "class": "section-featured-collection",
+  "settings": [
+    { "type": "header", "content": "Collection" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 12, "step": 1, "label": "Products to show", "default": 4 },
+    { "type": "header", "content": "Section header" },
+    { "type": "text", "id": "label", "label": "Item count label", "default": "28 ITEMS" },
+    { "type": "text", "id": "heading", "label": "Section heading", "default": "NEW ARRIVAL" },
+    { "type": "text", "id": "view_all_label", "label": "View all label", "default": "VIEW ALL" },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "columns_desktop", "min": 2, "max": 5, "step": 1, "label": "Columns (desktop)", "default": 4 },
+    { "type": "range", "id": "columns_mobile", "min": 1, "max": 2, "step": 1, "label": "Columns (mobile)", "default": 1 },
+    { "type": "range", "id": "card_gap", "min": 8, "max": 60, "step": 4, "unit": "px", "label": "Gap between cards", "default": 20 },
+    { "type": "range", "id": "card_radius", "min": 0, "max": 40, "step": 2, "unit": "px", "label": "Card border radius", "default": 20 },
+    { "type": "checkbox", "id": "show_nav_arrows", "label": "Show prev/next arrows", "default": true },
+    { "type": "checkbox", "id": "show_countdown", "label": "Show countdown timer on sale items", "default": false },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Padding top", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Padding bottom", "default": 80 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "section_bg", "label": "Section background", "default": "#FFFFFF" }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection",
+      "settings": {
+        "label": "28 ITEMS",
+        "heading": "NEW ARRIVAL",
+        "view_all_label": "VIEW ALL",
+        "columns_desktop": 4,
+        "columns_mobile": 1,
+        "card_gap": 20,
+        "card_radius": 20,
+        "products_to_show": 4,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "show_nav_arrows": true,
+        "show_countdown": false,
+        "section_bg": "#FFFFFF"
+      }
+    }
+  ]
+}
+{% endschema %}

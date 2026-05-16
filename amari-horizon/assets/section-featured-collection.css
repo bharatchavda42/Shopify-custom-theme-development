@@ -1,0 +1,162 @@
+/* ===================================================
+   FEATURED COLLECTION — Amari Horizon
+   =================================================== */
+
+.featured-collection {
+  background-color: var(--fc-bg, #FFFFFF);
+  padding-top: var(--fc-padding-top, 80px);
+  padding-bottom: var(--fc-padding-bottom, 80px);
+}
+
+.featured-collection__inner {
+  max-width: var(--page-width, 1720px);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter, 100px);
+}
+
+.featured-collection__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.featured-collection__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.featured-collection__label {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21.6px;
+  color: #4a4a4a;
+  margin: 0 0 4px;
+  text-transform: uppercase;
+}
+
+.featured-collection__heading {
+  font-family: var(--font-heading, 'Albert Sans', sans-serif);
+  font-weight: 700;
+  font-size: clamp(28px, 3.5vw, 48px);
+  line-height: 57.6px;
+  color: #4a4a4a;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.featured-collection__view-all {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21.6px;
+  color: #4a4a4a;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.featured-collection__view-all:hover {
+  color: var(--color-primary, #FFAA01);
+}
+
+/* Grid */
+.featured-collection__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--fc-cols-mobile, 1), 1fr);
+  gap: var(--fc-gap, 20px);
+}
+
+@media screen and (min-width: 750px) {
+  .featured-collection__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .featured-collection__grid {
+    grid-template-columns: repeat(var(--fc-cols-desktop, 4), 1fr);
+  }
+}
+
+/* Product card override for this grid */
+.featured-collection__card-wrap .product-card__media-wrapper {
+  border-radius: var(--fc-card-radius, 20px);
+}
+
+/* Nav arrows */
+.featured-collection__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.featured-collection__nav-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: #4a4a4a;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.featured-collection__nav-btn:hover {
+  color: var(--color-primary, #FFAA01);
+}
+
+.featured-collection__nav-btn--prev:hover {
+  transform: translateX(-4px);
+}
+
+.featured-collection__nav-btn--next:hover {
+  transform: translateX(4px);
+}
+
+/* Placeholder cards */
+.product-card--placeholder .product-card__media {
+  background: #f8f8fa;
+  border-radius: 20px;
+  aspect-ratio: 415 / 574;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-card--placeholder .placeholder-svg {
+  width: 60%;
+  height: 60%;
+  opacity: 0.4;
+}
+
+/* Responsive */
+@media screen and (max-width: 749px) {
+  .featured-collection__inner {
+    padding: 0 20px;
+  }
+
+  .featured-collection__header {
+    margin-bottom: 30px;
+  }
+
+  .featured-collection__heading {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .featured-collection__label {
+    font-size: 14px;
+  }
+
+  .featured-collection__nav {
+    margin-top: 20px;
+  }
+}

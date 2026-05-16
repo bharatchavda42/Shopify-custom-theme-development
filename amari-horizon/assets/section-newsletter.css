@@ -1,0 +1,124 @@
+/* ===================================================
+   NEWSLETTER — Amari Horizon
+   =================================================== */
+
+.newsletter-section {
+  background-color: var(--nl-bg, #F7F7F7);
+  color: var(--nl-text-color, #1A1A1A);
+  padding-top: var(--nl-padding-top, 80px);
+  padding-bottom: var(--nl-padding-bottom, 80px);
+}
+
+.newsletter-section__inner {
+  max-width: var(--page-width, 1720px);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter, 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.newsletter-section__heading {
+  font-family: var(--font-heading, 'Albert Sans', sans-serif);
+  font-weight: 700;
+  font-size: clamp(28px, 3.5vw, 48px);
+  line-height: 1.2;
+  color: var(--nl-text-color, #1A1A1A);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.newsletter-section__subtext {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--nl-text-color, #1A1A1A);
+  opacity: 0.7;
+  margin: 0;
+  max-width: 540px;
+}
+
+.newsletter-section__form {
+  width: 100%;
+  max-width: 560px;
+}
+
+.newsletter-section__field-wrap {
+  display: flex;
+  gap: 0;
+  border: 1px solid #1A1A1A;
+  border-radius: var(--nl-radius, 0);
+  overflow: hidden;
+}
+
+.newsletter-section__input {
+  flex: 1;
+  min-width: 0;
+  padding: 16px 20px;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 16px;
+  color: #1A1A1A;
+  background: #fff;
+  border: none;
+  outline: none;
+}
+
+.newsletter-section__input::placeholder {
+  color: #999;
+}
+
+.newsletter-section__btn {
+  flex-shrink: 0;
+  background-color: var(--nl-btn-bg, #1A1A1A);
+  color: var(--nl-btn-color, #FFFFFF);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-weight: 700;
+  font-size: 16px;
+  padding: 16px 28px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.newsletter-section__btn:hover {
+  opacity: 0.85;
+}
+
+.newsletter-section__success {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #2d7a2d;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+}
+
+.newsletter-section__error {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #c0392b;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+}
+
+@media screen and (max-width: 749px) {
+  .newsletter-section__inner {
+    padding: 0 20px;
+  }
+
+  .newsletter-section__heading {
+    font-size: 28px;
+  }
+
+  .newsletter-section__field-wrap {
+    flex-direction: column;
+    border-radius: 0;
+  }
+
+  .newsletter-section__input,
+  .newsletter-section__btn {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,0 +1,145 @@
+{% comment %} Section: Fashion in Motion (Video/Photo Cards) — Amari Horizon {% endcomment %}
+
+{{ 'section-video.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="fashion-motion"
+  id="shopify-section-{{ section.id }}"
+  style="
+    --fm-padding-top: {{ section.settings.padding_top }}px;
+    --fm-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --fm-card-radius: {{ section.settings.card_radius }}px;
+    --fm-bg: {{ section.settings.section_bg }};
+  "
+>
+  <div class="page-width fashion-motion__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="fashion-motion__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="fashion-motion__scroll-wrapper">
+      <div class="fashion-motion__track">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'card' -%}
+              <div class="fashion-motion__card" {{ block.shopify_attributes }}>
+                <div class="fashion-motion__card-media">
+                  {%- if block.settings.image != blank -%}
+                    {{
+                      block.settings.image
+                      | image_url: width: 400
+                      | image_tag:
+                        class: 'fashion-motion__card-img',
+                        loading: 'lazy',
+                        widths: '300,400,600',
+                        sizes: '(max-width: 749px) 80vw, 306px'
+                    }}
+                  {%- else -%}
+                    <div class="fashion-motion__card-placeholder">{{ 'product-apparel-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}</div>
+                  {%- endif -%}
+                  <div class="fashion-motion__card-gradient"></div>
+                  <div class="fashion-motion__card-play" aria-hidden="true">
+                    <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="35" cy="35" r="35" fill="white" fill-opacity="0.9"/>
+                      <path d="M28 24L48 35L28 46V24Z" fill="#4a4a4a"/>
+                    </svg>
+                  </div>
+                </div>
+
+                {%- if block.settings.product_name != blank -%}
+                  <div class="fashion-motion__card-info">
+                    <div class="fashion-motion__card-thumb">
+                      {%- if block.settings.product_image != blank -%}
+                        {{
+                          block.settings.product_image
+                          | image_url: width: 80
+                          | image_tag:
+                            class: 'fashion-motion__thumb-img',
+                            loading: 'lazy',
+                            alt: block.settings.product_name
+                        }}
+                      {%- else -%}
+                        <div class="fashion-motion__thumb-placeholder"></div>
+                      {%- endif -%}
+                    </div>
+                    <div class="fashion-motion__card-meta">
+                      <p class="fashion-motion__product-name">{{ block.settings.product_name }}</p>
+                      {%- if block.settings.product_price != blank -%}
+                        <p class="fashion-motion__product-price">{{ block.settings.product_price }}</p>
+                      {%- endif -%}
+                    </div>
+                    {%- if block.settings.product_url != blank -%}
+                      <a href="{{ block.settings.product_url }}" class="fashion-motion__card-cta" aria-label="Add to cart">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M7 18C7.55228 18 8 17.5523 8 17C8 16.4477 7.55228 16 7 16C6.44772 16 6 16.4477 6 17C6 17.5523 6.44772 18 7 18Z" fill="currentColor"/>
+                          <path d="M15 18C15.5523 18 16 17.5523 16 17C16 16.4477 15.5523 16 15 16C14.4477 16 14 16.4477 14 17C14 17.5523 14.4477 18 15 18Z" fill="currentColor"/>
+                          <path d="M1 1H3L5.68 13.39C5.77144 13.8504 6.02191 14.264 6.38755 14.5583C6.75318 14.8526 7.2107 15.009 7.68 15H14.72C15.1893 15.009 15.6468 14.8526 16.0124 14.5583C16.3781 14.264 16.6286 13.8504 16.72 13.39L18 7H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </a>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- if section.settings.show_dots -%}
+      <div class="fashion-motion__dots" aria-hidden="true">
+        {%- for block in section.blocks -%}
+          <button class="fashion-motion__dot{% if forloop.first %} is-active{% endif %}" aria-label="Go to slide {{ forloop.index }}"></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Fashion in Motion",
+  "tag": "section",
+  "class": "section-fashion-motion",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Section heading", "default": "Fashion in Motion" },
+    { "type": "range", "id": "card_radius", "min": 0, "max": 40, "step": 4, "unit": "px", "label": "Card radius", "default": 20 },
+    { "type": "checkbox", "id": "show_dots", "label": "Show pagination dots", "default": true },
+    { "type": "color", "id": "section_bg", "label": "Section background", "default": "#FFFFFF" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Padding top", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Padding bottom", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Photo Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Card image" },
+        { "type": "image_picker", "id": "product_image", "label": "Product thumbnail" },
+        { "type": "text", "id": "product_name", "label": "Product name", "default": "Checked Casual Shirt" },
+        { "type": "text", "id": "product_price", "label": "Product price", "default": "$38.00" },
+        { "type": "url", "id": "product_url", "label": "Product link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fashion in Motion",
+      "settings": {
+        "heading": "Fashion in Motion",
+        "card_radius": 20,
+        "show_dots": true,
+        "section_bg": "#FFFFFF",
+        "padding_top": 80,
+        "padding_bottom": 80
+      },
+      "blocks": [
+        { "type": "card", "settings": { "product_name": "Checked Casual Shirt", "product_price": "$38.00" } },
+        { "type": "card", "settings": { "product_name": "Denim Utility Shirt", "product_price": "$42.00" } },
+        { "type": "card", "settings": { "product_name": "Textured Knit Shirt", "product_price": "$40.00" } },
+        { "type": "card", "settings": { "product_name": "Tailored Casual Shirt", "product_price": "$45.00" } },
+        { "type": "card", "settings": { "product_name": "Wool Relaxed Fit T-Shirt", "product_price": "$36.00" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

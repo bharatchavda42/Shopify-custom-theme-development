@@ -1,0 +1,131 @@
+{% comment %} Section: Image With Text (Move Freely) — Amari Horizon {% endcomment %}
+
+{{ 'section-image-with-text.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="image-with-text"
+  id="shopify-section-{{ section.id }}"
+  style="
+    --iwt-padding-top: {{ section.settings.padding_top }}px;
+    --iwt-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --iwt-overlay-bg: {{ section.settings.overlay_bg }};
+    --iwt-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --iwt-panel-bg: {{ section.settings.panel_bg }};
+    --iwt-panel-radius: {{ section.settings.panel_radius }}px;
+  "
+>
+  {%- if section.settings.show_marquee -%}
+    <div class="image-with-text__marquee" aria-hidden="true"
+      style="background:{{ section.settings.marquee_bg }}; --iwt-marquee-dir: {{ section.settings.marquee_direction }};">
+      <div class="image-with-text__marquee-track">
+        {%- for i in (1..8) -%}
+          <span class="image-with-text__marquee-item">{{ section.settings.marquee_text }}</span>
+          <span class="image-with-text__marquee-sep">✦</span>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="image-with-text__media">
+    {%- if section.settings.bg_image != blank -%}
+      {{
+        section.settings.bg_image
+        | image_url: width: 1920
+        | image_tag:
+          class: 'image-with-text__bg-image',
+          loading: 'lazy',
+          widths: '750,1100,1440,1920',
+          sizes: '100vw'
+      }}
+    {%- else -%}
+      <div class="image-with-text__bg-placeholder">{{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.left_image != blank -%}
+      <div class="image-with-text__left-image">
+        {{
+          section.settings.left_image
+          | image_url: width: 800
+          | image_tag:
+            class: 'image-with-text__left-img',
+            loading: 'lazy',
+            widths: '400,600,800',
+            sizes: '(max-width:749px) 100vw, 38vw'
+        }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="image-with-text__panel">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="image-with-text__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="image-with-text__subheading">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a
+        href="{{ section.settings.button_url | default: '/collections/all' }}"
+        class="image-with-text__btn"
+      >{{ section.settings.button_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image With Text",
+  "tag": "section",
+  "class": "section-image-with-text",
+  "settings": [
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background / full-width image" },
+    { "type": "image_picker", "id": "left_image", "label": "Left portrait image" },
+    { "type": "header", "content": "Marquee strip" },
+    { "type": "checkbox", "id": "show_marquee", "label": "Show marquee strip", "default": true },
+    { "type": "text", "id": "marquee_text", "label": "Marquee text", "default": "lightweight essentials ✦ NEW ARRIVAL" },
+    { "type": "color", "id": "marquee_bg", "label": "Marquee background", "default": "#fff374" },
+    {
+      "type": "select",
+      "id": "marquee_direction",
+      "label": "Marquee direction",
+      "options": [
+        { "value": "normal", "label": "Left" },
+        { "value": "reverse", "label": "Right" }
+      ],
+      "default": "normal"
+    },
+    { "type": "header", "content": "Panel content" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Move Freely. Dress Bold." },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Discover our lightweight essentials" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop The Collection" },
+    { "type": "url", "id": "button_url", "label": "Button link" },
+    { "type": "header", "content": "Panel style" },
+    { "type": "color", "id": "panel_bg", "label": "Panel background", "default": "#001222" },
+    { "type": "range", "id": "overlay_opacity", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "Panel opacity", "default": 50 },
+    { "type": "range", "id": "panel_radius", "min": 0, "max": 40, "step": 4, "unit": "px", "label": "Panel corner radius", "default": 20 },
+    { "type": "color", "id": "overlay_bg", "label": "Image overlay color", "default": "#000000" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Padding top", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Padding bottom", "default": 0 }
+  ],
+  "presets": [
+    {
+      "name": "Image With Text",
+      "settings": {
+        "show_marquee": true,
+        "marquee_text": "lightweight essentials ✦ NEW ARRIVAL",
+        "marquee_bg": "#fff374",
+        "heading": "Move Freely. Dress Bold.",
+        "subheading": "Discover our lightweight essentials",
+        "button_label": "Shop The Collection",
+        "panel_bg": "#001222",
+        "overlay_opacity": 50,
+        "panel_radius": 20,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  ]
+}
+{% endschema %}

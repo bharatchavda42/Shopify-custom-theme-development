@@ -1,0 +1,33 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "text": "FREE SHIPPING ON ORDERS OVER $75 — USE CODE: AMARI",
+        "bg_color": "#1A1A1A",
+        "text_color": "#FFFFFF",
+        "font_size": 14,
+        "show_close": false
+      },
+      "disabled": false
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo": "",
+        "logo_width": 150,
+        "menu": "main-menu",
+        "show_search": true,
+        "show_wishlist": true,
+        "show_account": true,
+        "header_bg": "#FFFFFF",
+        "header_text_color": "#4A4A4A",
+        "header_height": 96,
+        "sticky_header": true
+      }
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

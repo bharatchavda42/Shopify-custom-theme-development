@@ -1,0 +1,155 @@
+/* ===================================================
+   PROMO BANNERS — Amari Horizon
+   =================================================== */
+
+.promo-banners {
+  padding-top: var(--pb-padding-top, 80px);
+  padding-bottom: var(--pb-padding-bottom, 80px);
+}
+
+.promo-banners__inner {
+  max-width: var(--page-width, 1720px);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter, 100px);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--pb-gap, 30px);
+}
+
+@media screen and (min-width: 750px) {
+  .promo-banners__inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Individual banner */
+.promo-banners__banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--pb-item-radius, 0px);
+  aspect-ratio: 579 / 660;
+  cursor: pointer;
+}
+
+.promo-banners__media {
+  position: absolute;
+  inset: 0;
+}
+
+.promo-banners__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.promo-banners__banner:hover .promo-banners__image {
+  transform: scale(1.04);
+}
+
+.promo-banners__placeholder {
+  width: 100%;
+  height: 100%;
+  background: #f8f8fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.promo-banners__placeholder .placeholder-svg {
+  width: 50%;
+  height: 50%;
+  opacity: 0.4;
+}
+
+.promo-banners__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Content */
+.promo-banners__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.promo-banners__label {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38.4px;
+  color: #fff;
+  margin: 0;
+}
+
+.promo-banners__title {
+  font-family: var(--font-heading, 'Albert Sans', sans-serif);
+  font-weight: 700;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 57.6px;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.promo-banners__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #4a4a4a;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21.6px;
+  padding: 18px 32px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin-top: 10px;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.promo-banners__btn:hover {
+  background: var(--color-primary, #FFAA01);
+  color: #fff;
+}
+
+/* Responsive */
+@media screen and (max-width: 749px) {
+  .promo-banners__inner {
+    padding: 0 20px;
+  }
+
+  .promo-banners__banner {
+    aspect-ratio: 3 / 2;
+  }
+
+  .promo-banners__content {
+    padding: 20px 24px 24px;
+  }
+
+  .promo-banners__label {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .promo-banners__title {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .promo-banners__btn {
+    font-size: 14px;
+    padding: 12px 20px;
+  }
+}

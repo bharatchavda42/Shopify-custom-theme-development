@@ -1,0 +1,97 @@
+{% comment %} Section: Icon Features — Amari Horizon {% endcomment %}
+
+{{ 'section-icon-features.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="icon-features"
+  id="shopify-section-{{ section.id }}"
+  style="
+    --if-padding-top: {{ section.settings.padding_top }}px;
+    --if-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --if-bg: {{ section.settings.bg_color }};
+    --if-columns: {{ section.settings.columns }};
+    --if-icon-size: {{ section.settings.icon_size }}px;
+    --if-icon-color: {{ section.settings.icon_color }};
+    --if-heading-color: {{ section.settings.heading_color }};
+    --if-text-color: {{ section.settings.text_color }};
+  "
+>
+  <div class="page-width icon-features__inner">
+    {%- if section.settings.section_heading != blank -%}
+      <h2 class="icon-features__section-heading">{{ section.settings.section_heading }}</h2>
+    {%- endif -%}
+
+    <div class="icon-features__grid">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'feature' -%}
+            <div class="icon-features__item" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon_svg != blank -%}
+                <div class="icon-features__icon">{{ block.settings.icon_svg }}</div>
+              {%- elsif block.settings.icon_emoji != blank -%}
+                <div class="icon-features__icon icon-features__icon--emoji">{{ block.settings.icon_emoji }}</div>
+              {%- endif -%}
+              {%- if block.settings.heading != blank -%}
+                <h3 class="icon-features__heading">{{ block.settings.heading }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="icon-features__text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Icon Features",
+  "tag": "section",
+  "class": "section-icon-features",
+  "settings": [
+    { "type": "text", "id": "section_heading", "label": "Section heading" },
+    { "type": "range", "id": "columns", "min": 2, "max": 5, "step": 1, "label": "Columns (desktop)", "default": 4 },
+    { "type": "range", "id": "icon_size", "min": 24, "max": 80, "step": 4, "unit": "px", "label": "Icon size", "default": 48 },
+    { "type": "color", "id": "icon_color", "label": "Icon color", "default": "#FFAA01" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#1A1A1A" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#4A4A4A" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#FFFFFF" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "text", "id": "icon_emoji", "label": "Icon (emoji)", "default": "🚚" },
+        { "type": "html", "id": "icon_svg", "label": "Icon (SVG — overrides emoji)" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Free Shipping" },
+        { "type": "text", "id": "text", "label": "Text", "default": "On orders over $100" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon Features",
+      "settings": {
+        "columns": 4,
+        "icon_size": 48,
+        "icon_color": "#FFAA01",
+        "heading_color": "#1A1A1A",
+        "text_color": "#4A4A4A",
+        "bg_color": "#FFFFFF",
+        "padding_top": 60,
+        "padding_bottom": 60
+      },
+      "blocks": [
+        { "type": "feature", "settings": { "icon_emoji": "🚚", "heading": "Free Shipping", "text": "On orders over $100" } },
+        { "type": "feature", "settings": { "icon_emoji": "↩️", "heading": "Easy Returns", "text": "30-day hassle-free returns" } },
+        { "type": "feature", "settings": { "icon_emoji": "🔒", "heading": "Secure Payment", "text": "100% secure checkout" } },
+        { "type": "feature", "settings": { "icon_emoji": "💬", "heading": "24/7 Support", "text": "Always here to help" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,67 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "instagram-1": {
+          "type": "instagram_image",
+          "settings": { "image": "" }
+        },
+        "instagram-2": {
+          "type": "instagram_image",
+          "settings": { "image": "" }
+        },
+        "instagram-3": {
+          "type": "instagram_image",
+          "settings": { "image": "" }
+        },
+        "instagram-4": {
+          "type": "instagram_image",
+          "settings": { "image": "" }
+        },
+        "instagram-5": {
+          "type": "instagram_image",
+          "settings": { "image": "" }
+        },
+        "instagram-6": {
+          "type": "instagram_image",
+          "settings": { "image": "" }
+        }
+      },
+      "block_order": [
+        "instagram-1",
+        "instagram-2",
+        "instagram-3",
+        "instagram-4",
+        "instagram-5",
+        "instagram-6"
+      ],
+      "settings": {
+        "show_instagram": true,
+        "instagram_heading": "Follow Us On Instagram",
+        "instagram_url": "https://www.instagram.com",
+        "instagram_images_count": 6,
+        "footer_logo": "",
+        "brand_description": "Skin care products that go beyond the surface, nurturing your skin at its core.",
+        "footer_col_1_heading": "Quick Links",
+        "footer_col_1_menu": "footer",
+        "footer_col_2_heading": "Need Help",
+        "footer_col_2_menu": "",
+        "footer_col_3_heading": "",
+        "footer_col_3_menu": "",
+        "show_contact": true,
+        "contact_heading": "Contact Info",
+        "contact_address": "6847 Stirling Rd, Davie, Florida, US",
+        "contact_email": "info@amari.com",
+        "copyright_text": "Copyright © Amari 2026",
+        "show_payment_icons": true,
+        "footer_bg": "#4A4A4A",
+        "footer_text_color": "#FFFFFF",
+        "footer_border_color": "#5a5a5a"
+      }
+    }
+  },
+  "order": ["footer"]
+}
